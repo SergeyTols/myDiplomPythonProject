@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Сообщения пользователей!</h1>
+<table class="table table-striped">
+    <tr>
+        <th>№</th>
+        <th>Заголовок</th>
+        <th>Текст новости</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+    {% for item in news %}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{item.title}}</td>
+        <td>{{item.content}}</td>
+        <td>
+            <a href="/newsdel/{{item.id}}" class="btn btn-danger btn-sm">
+                🗑️
+            </a>
+        </td>
+        <td>
+            <a href="/newsjob/{{item.id}}" class="btn btn-warning btn-sm">
+                ✏️️
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

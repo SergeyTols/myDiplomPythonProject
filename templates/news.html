@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Новости</h1>
+{% if current_user.is_authenticated %}
+<a href="/newsjob" class="btn btn-secondary btn-sm my-1">
+    Добавить новость
+</a>
+{% endif %}
+{% for item in news %}
+<div class="row">
+    <div class="col border rounded">
+        <h2>{{ item.title }}</h2>
+        <p>{{item.content}}</p>
+        <div>Автор: {{item.user.name}}</div>
+    </div>
+</div>
+{% if current_user.is_authenticated and current_user == item.user %}
+<div class="py-1">
+    <a href="/newsjob/{{item.id}}" class="btn btn-warning btn-sm">
+    Изменить новость
+</a>
+<a href="/newsdel/{{item.id}}" class="btn btn-danger btn-sm">
+    Удалить новость
+</a>
+</div>
+{% endif %}
+{% endfor %}
+{% endblock %}
